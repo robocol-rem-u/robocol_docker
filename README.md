@@ -34,3 +34,42 @@ Now, use the `catkin` tool to build the workspace:
 catkin config --extend /opt/ros/melodic
 catkin build
 ```
+
+## Using Docker
+
+---
+**NOTE**
+
+The commands in this section should be executed as the `root` user, unless you have configured docker to be [managable as a non-root user](https://docs.docker.com/engine/install/linux-postinstall/).
+
+---
+
+Make sure the [Docker Engine](https://docs.docker.com/engine/install/#server) is installed and the `docker` service is running:
+```
+systemctl start docker
+```
+Build the docker image by executing:
+```
+docker build -t robocol_img .
+```
+Permit the root user to connect to X window display:
+```
+xhost +local:root
+```
+Start the docker container:
+```
+docker run --rm -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY --name robocol_erc robocol_erc
+```
+If you want the simulation to be able to communicate with ROS nodes running on the host or another docker container, add `--net=host` flag:
+```
+docker run --rm --net=host -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY --name robocol_erc  robocol_erc
+```
+To start any other ROS nodes inside the container, type:
+```
+docker exec -it robocol_erc /ros_entrypoint.sh <COMMAND>
+```
+To update the docker image, you need to rebuild it with `--no-cache` option:
+```
+docker build --no-cache -t robocol_erc .
+
+* Instructions taken from https://github.com/fictionlab/erc_sim_ws/blob/master/README.md
