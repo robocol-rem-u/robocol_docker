@@ -71,5 +71,6 @@ docker exec -it robocol_erc /ros_entrypoint.sh <COMMAND>
 To update the docker image, you need to rebuild it with `--no-cache` option:
 ```
 docker build --no-cache -t robocol_erc .
+```
 
 * Instructions taken from https://github.com/fictionlab/erc_sim_ws/blob/master/README.md
