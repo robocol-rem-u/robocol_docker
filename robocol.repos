@@ -1,15 +1,11 @@
 repositories:
   src/robocol_traction:
     type: git
-    url: 
+    url: https://github.com/robocol-rem-u/robocol_traction.git
     version: erc
   src/robocol_vision:
     type: git
-    url: 
+    url: https://github.com/robocol-rem-u/robocol_vision.git
     version: erc
-  src/robocol_test:
-    type: git
-    url: 
-    version: master
 
 
