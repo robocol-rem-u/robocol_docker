@@ -7,5 +7,9 @@ repositories:
     type: git
     url: https://github.com/robocol-rem-u/robocol_vision.git
     version: master
+   src/robocol_test:
+    type: git
+    url: https://github.com/robocol-rem-u/robocol_test.git
+    version: master
 
 
