@@ -48,6 +48,14 @@ Make sure the [Docker Engine](https://docs.docker.com/engine/install/#server) is
 ```
 systemctl start docker
 ```
+If you have an issue like the following:
+```
+ERRO[0000] failed to dial gRPC: cannot connect to the Docker daemon. Is 'docker daemon' running on this host?: dial unix /var/run/docker.sock: connect: permission denied 
+```
+Run the command below:
+```
+sudo chmod 666 /var/run/docker.sock
+```
 Build the docker image by executing:
 ```
 docker build -t robocol_img .
@@ -58,11 +66,11 @@ xhost +local:root
 ```
 Start the docker container:
 ```
-docker run --rm -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY --name robocol_erc robocol_erc
+docker run --rm -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY --name robocol_erc robocol_img
 ```
 If you want the simulation to be able to communicate with ROS nodes running on the host or another docker container, add `--net=host` flag:
 ```
-docker run --rm --net=host -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY --name robocol_erc  robocol_erc
+docker run --rm --net=host -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY --name robocol_erc  robocol_img
 ```
 To start any other ROS nodes inside the container, type:
 ```
